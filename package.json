@@ -1,0 +1,22 @@
+{
+  "name": "yourstory",
+  "version": "1.0.0",
+  "description": "Inspire others by sharing your story or keep it private.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "mongo",
+    "mlab",
+    "heroku"
+  ],
+  "author": "Shashank",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^5.0.7"
+  }
+}
