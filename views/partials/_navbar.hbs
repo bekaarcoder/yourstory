@@ -19,14 +19,22 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
+            {{#if user}}
+            {{user.displayName}}
+            {{else}}
             Account
+            {{/if}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/notes/create">Add Notes</a>
+            {{#if user}}
+            <a class="dropdown-item" href="/stories/private">My Stories</a>
+            <a class="dropdown-item" href="/stories/public">Public Stories</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/users/logout">Logout</a>
-            <a class="dropdown-item" href="/users/login">Login</a>
-            <a class="dropdown-item" href="/users/register">Create Account</a>
+            <a class="dropdown-item" href="/auth/logout">Logout</a>
+            {{else}}
+            <a class="dropdown-item" href="/auth/google">Login</a>
+            <a class="dropdown-item" href="/stories/public">Public Stories</a>
+            {{/if}}
           </div>
         </li>
       </ul>
