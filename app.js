@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -11,6 +12,7 @@ require('./models/User');
 require('./config/passport')(passport);
 
 // load routes
+const index = require('./routes/index');
 const auth = require('./routes/auth');
 
 // load google auth keys
@@ -28,6 +30,13 @@ mongoose.connect(keys.mongoURI).then(() => {
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+// template engine
+app.engine('.hbs', exphbs({
+	defaultLayout: 'main',
+	extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
 
 // coockie parser & express-session middleware
 app.use(cookieParser());
@@ -47,11 +56,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get('/', (req, res) => {
-	res.send('It worked');
-});
-
 // use routes
+app.use('/', index);
 app.use('/auth', auth);
 
 app.listen(port, () => {
