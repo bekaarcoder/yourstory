@@ -14,6 +14,7 @@ require('./config/passport')(passport);
 // load routes
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const stories = require('./routes/stories');
 
 // load google auth keys
 const keys = require('./config/keys');
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 // use routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/stories', stories);
 
 app.listen(port, () => {
 	console.log(`Service started on port ${port}`);

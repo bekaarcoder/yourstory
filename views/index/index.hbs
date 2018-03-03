@@ -3,9 +3,17 @@
 		<h1 class="display-4">Welcome to YourStory</h1>
 		<p class="lead">Everyone has a story to tell. So do you. Share your strories from the best and worst of your life to everyone or keep it to yourself as a private diary.</p>
 		<hr class="my-4">
+		{{#if user}}
+		<p class="lead">Go ahead, add your story and share it to the world.</p>
+		<p class="lead">
+			<a href="/stories/add" class="btn btn-primary">Add Story</a>
+			<a href="/stories/show" class="btn btn-success">See Public Stories</a>
+		</p>
+		{{else}}
 		<p class="lead">Are you new to YourStory? Go ahead and login with your Google account.</p>
 		<p class="lead">
 			<a href="/auth/google" class="btn btn-danger">Login With Google</a>
 		</p>
+		{{/if}}
 	</div>
 </div>
