@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
@@ -19,6 +22,9 @@ const stories = require('./routes/stories');
 // load google auth keys
 const keys = require('./config/keys');
 
+// load helpers
+const { truncate, stripTags } = require('./helpers/hbs');
+
 // map global promises
 mongoose.Promise = global.Promise;
 
@@ -34,10 +40,17 @@ const port = process.env.PORT || 5000;
 
 // template engine
 app.engine('.hbs', exphbs({
+	helpers: {
+		truncate: truncate,
+		stripTags: stripTags
+	},
 	defaultLayout: 'main',
 	extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
+
+// express-validator middleware
+app.use(expressValidator());
 
 // coockie parser & express-session middleware
 app.use(cookieParser());
@@ -47,12 +60,21 @@ app.use(session({
 	saveUninitialized: false
 }));
 
+// body-parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
+// connect-flash middleware
+app.use(flash());
+
 // set local variables
 app.use((req, res, next) => {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
 	res.locals.user = req.user || null;
 	next();
 });
