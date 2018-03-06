@@ -23,7 +23,7 @@ const stories = require('./routes/stories');
 const keys = require('./config/keys');
 
 // load helpers
-const { truncate, stripTags } = require('./helpers/hbs');
+const { truncate, stripTags, formatDate } = require('./helpers/hbs');
 
 // map global promises
 mongoose.Promise = global.Promise;
@@ -42,7 +42,8 @@ const port = process.env.PORT || 5000;
 app.engine('.hbs', exphbs({
 	helpers: {
 		truncate: truncate,
-		stripTags: stripTags
+		stripTags: stripTags,
+		formatDate: formatDate
 	},
 	defaultLayout: 'main',
 	extname: '.hbs'

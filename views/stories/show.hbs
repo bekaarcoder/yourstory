@@ -1,1 +1,24 @@
-<h2>Show Story</h2>
+<div class="row mt-5">
+	<div class="col-md-9">
+		<div class="card text-center">
+			<div class="card-body">
+				<h3 class="card-title mb-3">{{story.title}}</h3>
+				<h5 class="card-subtitle lead text-muted mb-3">{{formatDate story.date 'dddd, MMMM Do YYYY'}}</h5>
+				<div class="card-text">
+					{{{story.body}}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card text-center">
+			<div class="card-body">
+				<h3 class="card-title mb-2">{{story.user.displayName}}</h3>
+				<div>
+					<img src="{{story.user.profileImg}}" class="img-fluid rounded-circle">
+				</div>
+				<a href="/stories/user/{{story.user.id}}" class="btn btn-outline-success mt-3">More from {{story.user.firstName}}</a>
+			</div>
+		</div>
+	</div>
+</div>
