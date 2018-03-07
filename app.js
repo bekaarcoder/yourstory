@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
@@ -52,6 +53,9 @@ app.set('view engine', '.hbs');
 
 // express-validator middleware
 app.use(expressValidator());
+
+// to access static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // coockie parser & express-session middleware
 app.use(cookieParser());

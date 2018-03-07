@@ -1,0 +1,11 @@
+.story-body {
+	height: 120px;
+}
+
+.status {
+	text-transform: capitalize;
+}
+
+#delete-form {
+	display: inline;
+}
