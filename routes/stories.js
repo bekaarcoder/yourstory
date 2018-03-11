@@ -32,6 +32,17 @@ router.get('/show/:id', (req, res) => {
 	});
 });
 
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
+	Story.findOne({
+		_id: req.params.id
+	}).then((story) => {
+		res.render('stories/edit', {
+			header: "Edit Story",
+			story: story
+		});
+	});
+});
+
 // add story route
 router.get('/add', ensureAuthenticated, (req, res) => {
 	res.render('stories/add', {

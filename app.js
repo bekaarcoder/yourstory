@@ -24,7 +24,7 @@ const stories = require('./routes/stories');
 const keys = require('./config/keys');
 
 // load helpers
-const { truncate, stripTags, formatDate } = require('./helpers/hbs');
+const { truncate, stripTags, formatDate, optionSelected } = require('./helpers/hbs');
 
 // map global promises
 mongoose.Promise = global.Promise;
@@ -44,7 +44,8 @@ app.engine('.hbs', exphbs({
 	helpers: {
 		truncate: truncate,
 		stripTags: stripTags,
-		formatDate: formatDate
+		formatDate: formatDate,
+		optionSelected: optionSelected
 	},
 	defaultLayout: 'main',
 	extname: '.hbs'

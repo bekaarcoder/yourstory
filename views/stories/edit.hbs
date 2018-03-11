@@ -1,1 +1,45 @@
-<h2>Edit Story</h2>
+<h2 class="text-center mb-3">Edit Story</h2>
+<div class="row justify-content-center">
+	{{#if error_msg}}
+	<div class="col-md-6 text-center">
+		<div class="alert alert-danger" role="alert">
+			{{error_msg}}
+		</div>
+	</div>
+	{{/if}}
+</div>
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<form method="post" action="/stories/edit">
+					<div class="form-group">
+						<label for="title"><strong>Story Title</strong></label>
+						<input type="text" name="title" class="form-control" value="{{story.title}}">
+					</div>
+					<div class="form-group">
+						<label for="status"><strong>Status</strong></label>
+						<select class="custom-select" name="status">
+							{{#optionSelected story.status}}
+							<option value="public">Public</option>
+							<option value="private">Private</option>
+							<option value="unpublished">Unpublished</option>
+							{{/optionSelected}}
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" name="allowComments" id="allow" {{#if story.allowComments}} checked="checked" {{/if}}>
+							<label class="custom-control-label" for="allow">Allow Comments</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="story"><strong>Tell us your story:</strong></label>
+						<textarea class="form-control" name="body" rows="4">{{story.body}}</textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

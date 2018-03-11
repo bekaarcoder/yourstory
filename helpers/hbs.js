@@ -16,5 +16,8 @@ module.exports = {
 	},
 	formatDate: function(date, format){
 		return moment(date).format(format);
+	},
+	optionSelected: function(value, options) {
+		return options.fn(this).replace(new RegExp('value=\"' + value + '\"'), '$&selected="selected"').replace(new RegExp('>' + value + '</option>'), 'selected="selected"$&');
 	}
 }
