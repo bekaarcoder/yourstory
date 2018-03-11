@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
@@ -69,6 +70,9 @@ app.use(session({
 // body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// method override middleware
+app.use(methodOverride('_method'));
 
 // Passport Middleware
 app.use(passport.initialize());

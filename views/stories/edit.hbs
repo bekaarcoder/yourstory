@@ -12,7 +12,8 @@
 	<div class="col-md-6">
 		<div class="card">
 			<div class="card-body">
-				<form method="post" action="/stories/edit">
+				<form method="post" action="/stories/edit/{{story.id}}?_method=PUT">
+					<input type="hidden" name="_method" value="PUT">
 					<div class="form-group">
 						<label for="title"><strong>Story Title</strong></label>
 						<input type="text" name="title" class="form-control" value="{{story.title}}">
