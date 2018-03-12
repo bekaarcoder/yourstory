@@ -134,4 +134,21 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
   });
 });
 
+// post comment
+router.post('/comment/:id', ensureAuthenticated, (req, res) => {
+  const newComment = {
+    commentBody: req.body.comment,
+    commentUser: req.user.id
+  };
+  Story.findOne({
+    _id: req.params.id
+  }).then((story) => {
+    story.comments.unshift(newComment);
+    story.save().then((story) => {
+      req.flash('success_msg', "Comment Added Successfully.");
+      res.redirect(`/stories/show/${story.id}`);
+    });
+  });
+});
+
 module.exports = router;

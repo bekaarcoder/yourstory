@@ -9,6 +9,27 @@
 				</div>
 			</div>
 		</div>
+		{{#if story.allowComments}}
+		<div class="card mt-5">
+			<div class="card-body">
+				<h3 class="card-title lead"><strong>Comments</strong></h3>
+				{{#if user}}
+				<form method="post" action="/stories/comment/{{story.id}}">
+					<div class="form-row">
+						<div class="col-10">
+							<textarea name="comment" class="form-control mr-2" rows="1" placeholder="Post a comment here..."></textarea>
+						</div>
+						<div class="col-2">
+							<button type="submit" class="btn btn-primary">Post</button>
+						</div>
+					</div>
+				</form>
+				{{else}}
+				<p>You are not logged in. <a href="/auth/google">Login</a> to post comment.</p>
+				{{/if}}
+			</div>
+		</div>
+		{{/if}}
 	</div>
 	<div class="col-md-3">
 		<div class="card text-center">
