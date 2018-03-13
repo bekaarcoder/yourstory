@@ -1,0 +1,19 @@
+<h2>{{userName}}'s Stories</h2>
+<div class="row mt-5">
+	{{#each stories}}
+		<div class="col-md-4">
+			<div class="card bg-light mb-3">
+				<div class="card-header">
+					<h4 class="display-6">{{title}}</h4>
+				</div>
+				<div class="card-body">
+					<h6 class="card-subtitle mb-2 text-muted">by {{user.displayName}}</h6>
+					<p class="card-text story-body">{{stripTags (truncate body 150)}}</p>
+					<a href="/stories/show/{{id}}" class="btn btn-outline-success">Read Story</a>
+				</div>
+			</div>
+		</div>
+	{{else}}
+		<p class="lead mt-t text-center">No Stories Found</p>
+	{{/each}}
+</div>

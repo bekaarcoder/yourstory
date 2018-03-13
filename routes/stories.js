@@ -25,9 +25,10 @@ router.get('/', (req, res) => {
 router.get('/show/:id', (req, res) => {
   Story.findOne({
     _id: req.params.id
-  }).populate('user').then((story) => {
+  }).populate('user').populate('comments.commentUser').then((story) => {
     res.render('stories/show', {
-      story: story
+      story: story,
+      header: story.title
     });
   });
 });
@@ -147,6 +148,18 @@ router.post('/comment/:id', ensureAuthenticated, (req, res) => {
     story.save().then((story) => {
       req.flash('success_msg', "Comment Added Successfully.");
       res.redirect(`/stories/show/${story.id}`);
+    });
+  });
+});
+
+// getting stories of each user
+router.get('/user/:id', (req, res) => {
+  Story.find({
+    user: req.params.id
+  }).populate('user').then((stories) => {
+    res.render('stories/user', {
+      stories: stories,
+      userName: stories[0].user.displayName
     });
   });
 });

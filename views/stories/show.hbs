@@ -27,6 +27,22 @@
 				{{else}}
 				<p>You are not logged in. <a href="/auth/google">Login</a> to post comment.</p>
 				{{/if}}
+				{{#each story.comments}}
+				<div class="row mt-3">
+					<div class="col-md-2 col-sm-2 mx-auto">
+						<img src="{{commentUser.profileImg}}" class="rounded-circle" style="width: 100%">
+					</div>
+					<div class="col-md-10 col-sm-10">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{{commentUser.displayName}}</h5>
+								<p class="text-muted">Posted on {{formatDate commentDate 'MMMM Do YYYY'}}</p>
+								<p class="card-text">{{commentBody}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
 			</div>
 		</div>
 		{{/if}}
